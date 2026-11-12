@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>お金の計算 プリント</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&display=swap" rel="stylesheet">
+<style id="pageCss">
+.page{width:210mm;height:297mm;padding:5mm 5mm 5mm 15mm;box-sizing:border-box;background:#fff;color:#000;font-family:'BIZ UDPGothic',sans-serif;font-size:12pt;line-height:var(--lh,2);overflow:hidden;position:relative}
+.page *{box-sizing:border-box}
+.sheet{height:100%;overflow:hidden}
+.page rt{font-size:6pt;font-weight:400}
+.nm{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:var(--nm,7mm)}
+.nm .no{font-size:12pt}
+.nm .nr{display:flex;align-items:flex-end;gap:2mm}
+.nm .line{display:inline-block;width:70mm;height:9mm;border-bottom:0.3mm solid #000}
+.lead{margin:0 0 1mm}
+.cap{font-weight:700;margin-top:1.5mm;margin-bottom:0.5mm}
+.tw{display:flex;gap:7mm;align-items:flex-start}
+.tw .tc{flex:1;min-width:0}
+table.tb{border-collapse:collapse;width:100%;table-layout:fixed;line-height:1.55}
+.tb th,.tb td{border:0.3mm solid #000;padding:var(--cp,1.3mm) 1mm;text-align:center;font-weight:400;vertical-align:middle}
+.tb th{background:#e4e4e4}
+.tb th.rh{background:#fff;text-align:left;padding-left:2.5mm}
+.note{border:0.3mm solid #000;padding:0.5mm 3mm 1mm;margin-top:2.5mm}
+.note .nt{font-weight:700}
+.note .ni{padding-left:1em;text-indent:-1em}
+.q{margin-top:2mm;padding-bottom:var(--gap,10mm)}
+.qt{padding-left:3em;text-indent:-3em}
+.bl{white-space:nowrap}
+.opts{display:flex;flex-wrap:wrap;gap:0.8mm 9mm;padding-left:3em;margin-top:0.5mm}
+.opts.col{flex-direction:column}
+.ansp h2{font-size:14pt;margin:2mm 0 3mm}
+.ansp .al{margin-top:4mm;padding-left:3em;text-indent:-3em}
+.ansp .al b{font-weight:700}
+.ansp .why{display:block;text-indent:0}
+@media print{
+  @page{size:A4;margin:5mm 5mm 5mm 15mm}
+  html,body{margin:0;padding:0;background:#fff}
+  .page{width:auto;height:286mm;padding:0;margin:0;box-shadow:none;break-after:page;page-break-after:always}
+  .page:last-child{break-after:auto;page-break-after:auto}
+  .noprint{display:none!important}
+}
+</style>
+<style>
+html,body{height:100%;margin:0}
+body{font-family:'BIZ UDPGothic',sans-serif;background:#eef4f7;color:#223;overflow:hidden;touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-text-size-adjust:100%;display:flex;flex-direction:column}
+rt{font-size:.5em}
+header{background:#fff;border-bottom:2px solid #9cc7d8;padding:4px 10px 5px;flex:none}
+.top{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+h1{font-size:17px;margin:0 auto 0 0;line-height:1.7}
+button{font-family:inherit;font-size:14px;min-height:36px;min-width:36px;padding:0 11px;border-radius:7px;border:2px solid #4a90a8;background:#fff;color:#1d4f60;line-height:1.7;cursor:pointer;touch-action:manipulation}
+button.main{background:#2f7f99;color:#fff;border-color:#2f7f99}
+button.on{background:#d5edf5;border-color:#2f7f99;font-weight:700}
+#panel{margin-top:4px;display:grid;gap:3px}
+#panel.hide{display:none}
+.row{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+.row>.lb{font-weight:700;font-size:13px;line-height:1.7;margin-right:1px}
+.row>.lb:not(:first-child){margin-left:8px}
+.stp{display:flex;align-items:center;gap:3px}
+.stp input{width:46px;height:36px;box-sizing:border-box;font-size:17px;text-align:center;border:2px solid #4a90a8;border-radius:7px;font-family:inherit;padding:0;-webkit-user-select:text;user-select:text}
+.sub{font-size:12px;color:#456;line-height:1.7}
+#msg{font-size:13px;color:#1d4f60;line-height:1.7;font-weight:700}
+#msg:empty{display:none}
+#pv{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;padding:8px 8px 40px}
+#scaler{transform-origin:0 0}
+#pages .page{margin:0 0 6mm;box-shadow:0 1px 6px rgba(0,0,0,.25)}
+#pages [contenteditable]{-webkit-user-select:text;user-select:text;outline:none}
+#pages [contenteditable]:focus{background:#fff6c9}
+.warn{position:absolute;left:15mm;right:5mm;bottom:2mm;background:#fff;border:0.6mm solid #b35b00;color:#7a3e00;padding:1mm 2mm;font-size:11pt;line-height:1.9}
+#help{position:fixed;left:0;top:0;right:0;bottom:0;background:rgba(30,50,60,.45);z-index:10;display:flex;align-items:center;justify-content:center;padding:10px}
+#help[hidden]{display:none}
+.hbox{background:#fff;border:2px solid #4a90a8;border-radius:10px;max-width:760px;width:100%;max-height:100%;display:flex;flex-direction:column}
+.hbar{display:flex;align-items:center;justify-content:space-between;padding:6px 10px;border-bottom:2px solid #9cc7d8;flex:none}
+.hbar .ht{font-size:17px;font-weight:700;line-height:1.7}
+#helpBody{overflow:auto;-webkit-overflow-scrolling:touch;padding:4px 14px 14px;font-size:14px;line-height:1.9;-webkit-user-select:text;user-select:text}
+#helpBody h3{font-size:15px;margin:12px 0 3px;color:#1d4f60;border-left:5px solid #4a90a8;padding-left:7px}
+#helpBody table{border-collapse:collapse;width:100%}
+#helpBody th,#helpBody td{border:1px solid #9cc7d8;padding:2px 7px;text-align:left;vertical-align:top}
+#helpBody th{background:#e6f2f7;white-space:nowrap;font-weight:700}
+#helpBody p{margin:3px 0}
+@media print{
+  #help{display:none!important}
+  html,body{height:auto!important;overflow:visible!important;background:#fff}
+  body{display:block}
+  header{display:none!important}
+  #pv{overflow:visible;padding:0;flex:none}
+  #pvh{height:auto!important}
+  #scaler{transform:none!important;width:auto!important;margin:0!important}
+  #pages .page{margin:0;box-shadow:none;width:auto;height:286mm;padding:0}
+  #pages [contenteditable]:focus{background:none}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="top">
+    <h1 data-r="お{金|かね}の{計算|けいさん} プリント"></h1>
+    <button id="bSet" data-r="{設定|せってい}"></button>
+    <button id="bHelp" data-r="{説明|せつめい}"></button>
+    <button id="bNew" class="main" data-r="{新|あたら}しい{問題|もんだい}"></button>
+    <button id="bPrint" class="main" data-r="{印刷|いんさつ}する"></button>
+    <button id="bCopy" data-r="HTMLをコピー"></button>
+  </div>
+  <div id="panel">
+    <div class="row"><span class="lb">ジャンル</span><span id="gGenre" class="row"></span></div>
+    <div class="row">
+      <span class="lb">レベル</span><span class="stp" id="sLevel"></span>
+      <span class="lb" data-r="まい{数|すう}"></span><span class="stp" id="sCount"></span>
+      <span class="lb" data-r="{答|こた}え"></span><span id="gAns" class="row"></span>
+    </div>
+    <div class="sub" data-r="レベル 1：やさしい　2：ふつう　3：むずかしい　／　プリントの{文字|もじ}や{数字|すうじ}はタップして{直|なお}せます（{答|こた}えは{変|か}わりません）"></div>
+  </div>
+  <div id="msg"></div>
+</header>
+<div id="help" class="noprint" hidden><div class="hbox"><div class="hbar"><span class="ht" data-r="このアプリの{説明|せつめい}"></span><button id="bHelpClose" data-r="{閉|と}じる"></button></div><div id="helpBody"></div></div></div>
+<div id="pv"><div id="pvh"><div id="scaler"><div id="pages"></div></div></div></div>
+
+<script>
+/*GEN-START*/
+// ===== 問題を作る部分（画面や印刷とは分けてあるので、ほかのアプリにそのまま写せる） =====
+var rnd=Math.random;
+function ri(a,b){return a+Math.floor(rnd()*(b-a+1));}
+function pick(a){return a[ri(0,a.length-1)];}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=ri(0,i);var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function bl(pre,post,n){return pre+'（'+'　'.repeat(Math.round((n||4)*1.75))+'）'+post;}
+function pr(lo,hi,L){var s=L===1?50:10;return ri(Math.ceil(lo/s),Math.floor(hi/s))*s;}
+function distinct(a){var o={};return a.every(function(v){if(o[v])return false;o[v]=1;return true;});}
+var EN='{円|えん}';
+var SEL='1つ{選|えら}び、（　）に○を{書|か}いてください。';
+var TAIL='を{見|み}て、（1）〜（4）の{問題|もんだい}に{答|こた}えてください。';
+var OSH='【お{知|し}らせ】';
+var ZEN='{全部|ぜんぶ}でいくらですか。';
+var OTS='を{出|だ}しました。おつりは、いくらですか。';
+var DOCHI='どちらが、いくら{安|やす}いですか。';
+var COIN='を、おつりが{出|で}ないように、ちょうどはらいます。お{金|かね}の{正|ただ}しい{組|く}み{合|あ}わせを';
+var NAMES=['ゆうた','みさき','けんじ','さくら','はると','あおい','そうた','ひなた'];
+
+// ---- 小問を作る部品 ----
+// 金額を書く問題
+function wq(o,t,val,w){o.qs.push({t:t,a:bl('',EN)});o.ans.push({a:val+EN,w:w||''});return true;}
+// 数を書く問題
+function cq(o,t,val,unit,w){o.qs.push({t:t,a:bl('',unit,3)});o.ans.push({a:val+unit,w:w||''});return true;}
+// 3つから選ぶ問題（正しいもの1つと、まちがい2つ）
+function selQ(o,t,correct,wrongs,w){
+  var seen={},ws=[];seen[correct]=1;
+  wrongs.forEach(function(x){if(x&&!seen[x]){seen[x]=1;ws.push(x);}});
+  if(ws.length<2)return false;
+  var list=shuffle([{s:correct,ok:1},{s:ws[0]},{s:ws[1]}]),pos=0;list.forEach(function(x,k){if(x.ok)pos=k;});
+  o.qs.push({t:t+SEL,opts:list.map(function(x){return x.s;}),col:true});
+  o.ans.push({a:'{上|うえ}から'+(pos+1)+'{番目|ばんめ}',w:w||''});return true;
+}
+// どちらがいくら安いか（まちがいは「割引などを忘れた結果」と「反対」）
+function cheapQ(o,t,nA,nB,tA,tB,fA,fB,w){
+  if(tA===tB)return false;
+  function st(a,b){return a<b?nA+'{方|ほう}が'+(b-a)+EN+'{安|やす}い':nB+'{方|ほう}が'+(a-b)+EN+'{安|やす}い';}
+  var ws=[];if(fA!==fB)ws.push(st(fA,fB));
+  ws.push(st(tB,tA));ws.push(st(tA<tB?tA-100:tA+100,tB));
+  return selQ(o,t,st(tA,tB),ws,w);
+}
+// お金の組み合わせ
+function coins(n){
+  var ds=[[1000,'1000{円|えん}さつ'],[500,'500{円玉|えんだま}'],[100,'100{円玉|えんだま}'],[50,'50{円玉|えんだま}'],[10,'10{円玉|えんだま}']],out=[];
+  ds.forEach(function(d){var c=Math.floor(n/d[0]);n-=c*d[0];if(c)out.push(d[1]+c+'まい');});return out.join('、');
+}
+function coinQ(o,t,total,forgot,w){
+  var c=[forgot,total+100,total-50,total+50].filter(function(v){return v>0&&v!==total;}).map(coins);
+  return selQ(o,t+COIN,coins(total),c,w);
+}
+function P1(x){return x[1];}
+function yenRows(a){return a.map(function(x){return [x[0],x[1]+EN];});}
+
+// ---- ジャンル1：ラーメン屋 ----
+function genRamen(L){
+  var men=[['しょうゆラーメン',pr(600,750,L)],['しおラーメン',pr(600,750,L)],['みそラーメン',pr(700,850,L)],['とんこつラーメン',pr(700,850,L)],['チャーシューメン',pr(900,1050,L)]];
+  var gz=L===3?ri(13,18)*20:pr(250,350,L);
+  var so=[['チャーハン',pr(400,550,L)],['からあげ',pr(300,450,L)],['ライス',pr(100,200,L)],['ゆでたまご',pr(80,150,L)]];
+  var side=[['ぎょうざ',gz]].concat(so);
+  if(!distinct(men.map(P1)))return null;
+  var OM=L===1?100:pick([100,150]),SD=L===2?pick([50,100]):0,RD=50,gzs=L===2?gz-SD:L===3?gz/2:gz;
+  var nm=shuffle(NAMES),o={qs:[],ans:[]},m=shuffle(men),s=shuffle(so),a,b,c,t,ok;
+  var CH='{注文|ちゅうもん}',DAI='{代金|だいきん}は、',OMR='{大|おお}もりの',D10='10日に、';
+  var notes=['ラーメンを{大|おお}もりにすると、'+OM+EN+'{高|たか}くなります。'];
+  if(L===2)notes.push('ラーメン1つとぎょうざ1つをいっしょに'+CH+'すると、ぎょうざが'+SD+EN+'{引|び}きになります。');
+  if(L===3){notes.push('ラーメン1つとぎょうざ1つをいっしょに'+CH+'すると、ぎょうざが{半額|はんがく}になります。');
+    notes.push('{毎月|まいつき}10日は「ラーメンの{日|ひ}」です。ラーメンがどれも'+RD+EN+'{引|び}きになります。');}
+  var gzw=L===2?'ぎょうざは'+gz+'−'+SD+'＝'+gzs+EN:'ぎょうざは{半額|はんがく}で'+gzs+EN;
+  // (1) 合計
+  if(L===1)wq(o,nm[0]+'さんは、'+m[0][0]+'を1つと、'+s[0][0]+'を1つ'+CH+'しました。'+DAI+ZEN,m[0][1]+s[0][1],m[0][1]+'＋'+s[0][1]);
+  else wq(o,nm[0]+'さんは、'+m[0][0]+'を1つと、'+s[0][0]+'を1つと、'+s[1][0]+'を1つ'+CH+'しました。'+DAI+ZEN,m[0][1]+s[0][1]+s[1][1],m[0][1]+'＋'+s[0][1]+'＋'+s[1][1]);
+  // (2) おつり・ちがい
+  if(L===1){a=m[1][1]<1000?m[1]:m[2];wq(o,nm[1]+'さんは、'+a[0]+'を1つ'+CH+'して、1000'+EN+OTS,1000-a[1],'1000−'+a[1]);}
+  else if(rnd()<0.5){a=m[1];b=s[2];t=a[1]+b[1];wq(o,nm[1]+'さんは、'+a[0]+'を1つと、'+b[0]+'を1つ'+CH+'して、2000'+EN+OTS,2000-t,a[1]+'＋'+b[1]+'＝'+t+'、2000−'+t);}
+  else{var srt=men.slice().sort(function(x,y){return y[1]-x[1];}),hi=srt[0],lo=srt[4];
+    wq(o,'いちばん{高|たか}いラーメンと、いちばん{安|やす}いラーメンでは、ねだんはいくらちがいますか。',hi[1]-lo[1],hi[0]+hi[1]+EN+'−'+lo[0]+lo[1]+EN);}
+  // (3) 条件つき
+  a=m[2];
+  if(L===1){b=s[1];wq(o,nm[2]+'さんは、'+OMR+a[0]+'を1つと、'+b[0]+'を1つ'+CH+'しました。'+DAI+ZEN,a[1]+OM+b[1],a[1]+'＋'+OM+'＋'+b[1]+'（{大|おお}もりは'+OM+EN+'{高|たか}くなります）');}
+  else if(L===2){b=s[3];wq(o,nm[2]+'さんは、'+a[0]+'を1つと、ぎょうざを1つと、'+b[0]+'を1つ'+CH+'しました。'+DAI+ZEN,a[1]+gzs+b[1],a[1]+'＋'+gzs+'＋'+b[1]+'（'+gzw+'）');}
+  else{t=a[1]-RD+OM;wq(o,nm[2]+'さんは、'+D10+OMR+a[0]+'を1つと、ぎょうざを1つ'+CH+'しました。'+DAI+ZEN,t+gzs,'ラーメンは'+a[1]+'−'+RD+'＋'+OM+'＝'+t+EN+'、'+gzw+'。'+t+'＋'+gzs);}
+  // (4)
+  var A=nm[3]+'さん',B=nm[4]+'さん',kind=pick(L===3?['cheap','remain']:['cheap','guess','coin']);
+  a=m[3];b=m[4];c=s[2];
+  if(kind==='cheap'){
+    if(L===1){var tA=a[1]+OM,tB=b[1]+c[1];
+      ok=cheapQ(o,A+'は'+OMR+a[0]+'を1つ、'+B+'は'+b[0]+'を1つと'+c[0]+'を1つ'+CH+'しました。{代金|だいきん}は、'+DOCHI,A+'の',B+'の',tA,tB,a[1],tB,
+        A+'：'+a[1]+'＋'+OM+'＝'+tA+EN+'、'+B+'：'+b[1]+'＋'+c[1]+'＝'+tB+EN);}
+    else if(L===2){tA=a[1]+gzs;tB=b[1]+OM+c[1];
+      ok=cheapQ(o,A+'は'+a[0]+'を1つとぎょうざを1つ、'+B+'は'+OMR+b[0]+'を1つと'+c[0]+'を1つ'+CH+'しました。{代金|だいきん}は、'+DOCHI,A+'の',B+'の',tA,tB,a[1]+gz,b[1]+c[1],
+        A+'：'+a[1]+'＋'+gzs+'＝'+tA+EN+'、'+B+'：'+b[1]+'＋'+OM+'＋'+c[1]+'＝'+tB+EN);}
+    else{tA=a[1]-RD+OM+gzs;tB=b[1]-RD+c[1];
+      ok=cheapQ(o,D10+A+'は'+OMR+a[0]+'を1つとぎょうざを1つ、'+B+'は'+b[0]+'を1つと'+c[0]+'を1つ'+CH+'しました。{代金|だいきん}は、'+DOCHI,A+'の',B+'の',tA,tB,a[1]+OM+gz,b[1]+c[1],
+        A+'：'+a[1]+'−'+RD+'＋'+OM+'＋'+gzs+'＝'+tA+EN+'、'+B+'：'+b[1]+'−'+RD+'＋'+c[1]+'＝'+tB+EN);}
+  }else if(kind==='guess'){
+    var cnt={},list=[];
+    men.forEach(function(x){side.forEach(function(y){var v=x[1]+(y[0]==='ぎょうざ'?gzs:y[1]);cnt[v]=(cnt[v]||0)+1;list.push([x,y,v]);});});
+    var g=shuffle(list.filter(function(z){return cnt[z[2]]===1;}))[0];if(!g)return null;
+    var pay=g[2]<1000?1000:2000;
+    o.qs.push({t:A+'は、ラーメン（{大|おお}もりではない）を1つと、サイドメニューを1つ'+CH+'して、'+pay+EN+'を{出|だ}しました。おつりは'+(pay-g[2])+EN+'でした。'+A+'が'+CH+'したものを{書|か}いてください。',
+      a:bl('ラーメン','　',5)+bl('サイドメニュー','',5)});
+    o.ans.push({a:g[0][0]+'と'+g[1][0],w:pay+'−'+(pay-g[2])+'＝'+g[2]+EN+'。'+g[0][1]+'＋'+(g[2]-g[0][1])+'＝'+g[2]+(g[1][0]==='ぎょうざ'&&L===2?'（'+gzw+'）':'')});ok=true;
+  }else if(kind==='coin'){
+    if(L===1){t=a[1]+OM+c[1];ok=coinQ(o,A+'は、'+OMR+a[0]+'を1つと、'+c[0]+'を1つ'+CH+'しました。この{代金|だいきん}',t,a[1]+c[1],a[1]+'＋'+OM+'＋'+c[1]+'＝'+t+EN);}
+    else{t=a[1]+gzs+c[1];ok=coinQ(o,A+'は、'+a[0]+'を1つと、ぎょうざを1つと、'+c[0]+'を1つ'+CH+'しました。この{代金|だいきん}',t,a[1]+gz+c[1],a[1]+'＋'+gzs+'＋'+c[1]+'＝'+t+EN+'（'+gzw+'）');}
+  }else{
+    t=2*(a[1]-RD)+gzs;
+    ok=wq(o,A+'は、3000'+EN+'を{持|も}って、'+D10+'{店|みせ}に{行|い}きました。'+a[0]+'を2つと、ぎょうざを1つ'+CH+'すると、{残|のこ}りのお{金|かね}は、いくらですか。',3000-t,
+      'ラーメンは（'+a[1]+'−'+RD+'）×2＝'+2*(a[1]-RD)+EN+'、'+gzw+'。3000−'+t);
+  }
+  if(!ok)return null;
+  return {genre:'ラーメン{屋|や}',lead:nm[0]+'さんたちは、ラーメン{屋|や}に{行|い}きました。{次|つぎ}の【メニュー】と'+OSH+TAIL,
+    tcap:'【メニュー】',tables:[{lbw:62,head:['ラーメン','ねだん'],rows:yenRows(men)},{lbw:62,head:['サイドメニュー','ねだん'],rows:yenRows(side)}],notes:notes,qs:o.qs,ans:o.ans};
+}
+
+// ---- ジャンル2：カフェ（持ち帰り） ----
+function genCafe(L){
+  var dr=[['コーヒー',pr(300,400,L)],['こうちゃ',pr(300,400,L)],['カフェオレ',pr(350,450,L)],['ココア',pr(350,450,L)],['オレンジジュース',pr(250,350,L)]];
+  var fd=[['サンドイッチ',pr(400,550,L)],['ホットドッグ',pr(350,450,L)],['チーズケーキ',pr(400,500,L)]],sm=[['ドーナツ',pr(150,250,L)],['クッキー',pr(100,200,L)]];
+  var D=L===1?50:pick([20,30]),LS=L===3?pick([50,80]):0;
+  var nm=shuffle(NAMES),o={qs:[],ans:[]},d=shuffle(dr),f=shuffle(fd),a,b,c,t,ok;
+  var CH='{注文|ちゅうもん}',DAI='{代金|だいきん}は、',IN='お{店|みせ}の{中|なか}で、',TO='{持|も}ち{帰|かえ}りで、',BIG='{大|おお}きいサイズの';
+  var notes=[L===1?'{持|も}ち{帰|かえ}りのときは、{合計|ごうけい}の{代金|だいきん}から'+D+EN+'{引|び}きになります。':'{持|も}ち{帰|かえ}りのときは、どのメニューも1つにつき'+D+EN+'{引|び}きになります。'];
+  if(L===3)notes.push('{飲|の}み{物|もの}は、'+LS+EN+'{高|たか}くすると、{大|おお}きいサイズにできます。');
+  // (1)
+  a=d[0];b=f[0];
+  if(L===1)wq(o,nm[0]+'さんは、'+IN+a[0]+'を1つと、'+b[0]+'を1つ'+CH+'しました。'+DAI+ZEN,a[1]+b[1],a[1]+'＋'+b[1]);
+  else wq(o,nm[0]+'さんは、'+IN+a[0]+'を2つと、'+b[0]+'を1つ'+CH+'しました。'+DAI+ZEN,2*a[1]+b[1],a[1]+'×2＋'+b[1]);
+  // (2)
+  a=d[1];b=f[1];c=pick(sm);
+  if(rnd()<0.5){if(L===1)wq(o,nm[1]+'さんは、'+IN+b[0]+'を1つ'+CH+'して、1000'+EN+OTS,1000-b[1],'1000−'+b[1]);
+    else{t=a[1]+b[1];if(t>=1000)return null;wq(o,nm[1]+'さんは、'+IN+a[0]+'を1つと、'+b[0]+'を1つ'+CH+'して、1000'+EN+OTS,1000-t,a[1]+'＋'+b[1]+'＝'+t+'、1000−'+t);}}
+  else wq(o,b[0]+'は、'+c[0]+'より、いくら{高|たか}いですか。',b[1]-c[1],b[1]+'−'+c[1]);
+  // (3) 持ち帰り
+  a=d[2];b=f[2];
+  if(L===1){t=a[1]+b[1];wq(o,nm[2]+'さんは、'+TO+a[0]+'を1つと、'+b[0]+'を1つ{買|か}いました。'+DAI+ZEN,t-D,a[1]+'＋'+b[1]+'＝'+t+'、'+t+'−'+D);}
+  else if(L===2){t=2*a[1]+b[1];wq(o,nm[2]+'さんは、'+TO+a[0]+'を2つと、'+b[0]+'を1つ{買|か}いました。'+DAI+ZEN,t-3*D,a[1]+'×2＋'+b[1]+'＝'+t+'、{全部|ぜんぶ}で3つなので'+D+'×3＝'+3*D+EN+'{引|び}き。'+t+'−'+3*D);}
+  else{t=2*(a[1]+LS)+b[1];wq(o,nm[2]+'さんは、'+TO+BIG+a[0]+'を2つと、'+b[0]+'を1つ{買|か}いました。'+DAI+ZEN,t-3*D,'（'+a[1]+'＋'+LS+'）×2＋'+b[1]+'＝'+t+'、{全部|ぜんぶ}で3つなので'+D+'×3＝'+3*D+EN+'{引|び}き。'+t+'−'+3*D);}
+  // (4)
+  var A=nm[3]+'さん',B=nm[4]+'さん',kind=pick(L===1?['max','coin']:L===2?['max','cheap','coin']:['max','cheap']);
+  a=d[3];b=d[4];c=pick(sm);
+  if(kind==='max'){
+    var bud=L===1?1000:pick([1000,1500]),base=a[1]+LS;
+    function tot(k){return L===1?base+k*c[1]-D:(base-D)+k*(c[1]-D);}
+    var k=0;while(tot(k+1)<=bud)k++;if(k<2||k>6)return null;
+    ok=cq(o,A+'は、'+bud+EN+'を{持|も}っています。'+TO+(L===3?BIG:'')+a[0]+'を1つと、'+c[0]+'をできるだけ{多|おお}く{買|か}います。'+c[0]+'は、いくつまで{買|か}えますか。',k,'つ',
+      c[0]+'が'+k+'つのとき'+tot(k)+EN+'、'+(k+1)+'つのとき'+tot(k+1)+EN+'（{持|も}ち{帰|かえ}りの{割引|わりびき}を{入|い}れた{代金|だいきん}）');
+  }else if(kind==='cheap'){
+    var x=f[0],y=f[1],tA=a[1]+x[1],tB=b[1]+LS+y[1]-2*D;
+    ok=cheapQ(o,A+'は、'+IN+a[0]+'を1つと'+x[0]+'を1つ'+CH+'しました。'+B+'は、'+TO+(L===3?BIG:'')+b[0]+'を1つと'+y[0]+'を1つ{買|か}いました。{代金|だいきん}は、'+DOCHI,A+'の',B+'の',tA,tB,tA,b[1]+y[1],
+      A+'：'+a[1]+'＋'+x[1]+'＝'+tA+EN+'、'+B+'：'+(L===3?'（'+b[1]+'＋'+LS+'）':b[1])+'＋'+y[1]+'−'+D+'×2＝'+tB+EN);
+  }else{
+    x=f[0];
+    if(L===1){t=a[1]+x[1]-D;ok=coinQ(o,A+'は、'+TO+a[0]+'を1つと、'+x[0]+'を1つ{買|か}いました。この{代金|だいきん}',t,a[1]+x[1],a[1]+'＋'+x[1]+'−'+D+'＝'+t+EN);}
+    else{t=a[1]+x[1]+c[1]-3*D;ok=coinQ(o,A+'は、'+TO+a[0]+'と'+x[0]+'と'+c[0]+'を1つずつ{買|か}いました。この{代金|だいきん}',t,a[1]+x[1]+c[1],a[1]+'＋'+x[1]+'＋'+c[1]+'−'+D+'×3＝'+t+EN);}
+  }
+  if(!ok)return null;
+  return {genre:'カフェ',lead:nm[0]+'さんたちは、カフェに{行|い}きました。{次|つぎ}の【メニュー】と'+OSH+TAIL,
+    tcap:'【メニュー】',tables:[{lbw:62,head:['{飲|の}み{物|もの}','ねだん'],rows:yenRows(dr)},{lbw:62,head:['{食|た}べ{物|もの}','ねだん'],rows:yenRows(fd.concat(sm))}],notes:notes,qs:o.qs,ans:o.ans};
+}
+
+// ---- ジャンル3：クリーニング（会員の料金） ----
+function genClean(L){
+  var base=[['ワイシャツ',150,250,50],['ズボン',450,550,100],['スカート',450,550,100],['セーター',550,700,100],['ジャケット',800,1000,150],['コート',1300,1600,300]];
+  var it=base.map(function(b){var n=pr(b[1],b[2],L),d=L===1?b[3]:b[3]<100?pick([30,40,50]):b[3]+pick([-20,-10,0,10,20]);return [b[0],n,n-d];});
+  var F=L>=2?pick([300,500]):0,SM=L===3?pick([150,200]):0;
+  var nm=shuffle(NAMES),o={qs:[],ans:[]},s=shuffle(it.slice(0,5)),coat=it[5],sh=it[0],a,b,c,t,ok;
+  var KA='{会員|かいいん}',RY='{料金|りょうきん}',TEN='{点|てん}',DASU='{出|だ}しました。',RYO=RY+'は、',FU='ふつうの'+RY,KR=KA+'の'+RY,NOT='は'+KA+'ではありません。';
+  var notes=[L===1?KA+'カードを{見|み}せると、'+KR+'になります。':KA+'になるときに、{年会費|ねんかいひ}（1{年分|ねんぶん}の{会費|かいひ}）'+F+EN+'をはらいます。'+KA+'の{人|ひと}は、'+KR+'になります。'];
+  if(L===3)notes.push('しみぬきをたのむと、1'+TEN+'につき'+SM+EN+'{高|たか}くなります。');
+  // (1)
+  a=s[0];b=s[1];
+  if(L===1)wq(o,nm[0]+'さん'+NOT+a[0]+'を1'+TEN+'と、'+b[0]+'を1'+TEN+DASU+RYO+ZEN,a[1]+b[1],a[1]+'＋'+b[1]);
+  else wq(o,nm[0]+'さん'+NOT+a[0]+'を2'+TEN+'と、'+b[0]+'を1'+TEN+DASU+RYO+ZEN,2*a[1]+b[1],a[1]+'×2＋'+b[1]);
+  // (2)
+  a=rnd()<0.5?coat:s[2];
+  if(rnd()<0.5)wq(o,a[0]+'を1'+TEN+'{出|だ}すとき、'+FU+'と'+KR+'では、いくらちがいますか。',a[1]-a[2],a[1]+'−'+a[2]);
+  else wq(o,KA+'ではない'+nm[1]+'さんは、'+a[0]+'を1'+TEN+'{出|だ}して、2000'+EN+OTS,2000-a[1],'2000−'+a[1]);
+  // (3)
+  a=s[3];b=s[4];
+  if(L===1)wq(o,KA+'の'+nm[2]+'さんは、'+a[0]+'を2'+TEN+'と、'+b[0]+'を1'+TEN+DASU+RYO+ZEN,2*a[2]+b[2],KR+'で'+a[2]+'×2＋'+b[2]);
+  else if(L===2)wq(o,nm[2]+'さんは、{今日|きょう}'+KA+'になって、'+a[0]+'を1'+TEN+'と、'+b[0]+'を1'+TEN+DASU+'{年会費|ねんかいひ}も{合|あ}わせて、'+ZEN,F+a[2]+b[2],KR+'で'+a[2]+'＋'+b[2]+'＝'+(a[2]+b[2])+'、{年会費|ねんかいひ}'+F+EN+'をたす');
+  else wq(o,KA+'の'+nm[2]+'さんは、'+a[0]+'を2'+TEN+'と、'+b[0]+'を1'+TEN+'{出|だ}して、'+b[0]+'だけ、しみぬきをたのみました。'+RYO+ZEN,2*a[2]+b[2]+SM,KR+'で'+a[2]+'×2＋'+b[2]+'＝'+(2*a[2]+b[2])+'、しみぬき'+SM+EN+'をたす');
+  // (4)
+  var A=nm[3]+'さん',B=nm[4]+'さん',kind=pick(L===1?['cheap','coin','remain']:L===2?['join']:['join','max']);
+  a=s[0];b=s[2];c=s[1];
+  if(kind==='cheap'){var tA=2*a[2],tB=b[1]+sh[1];if(b===sh)return null;
+    ok=cheapQ(o,KA+'の'+A+'は、'+a[0]+'を2'+TEN+DASU+KA+'ではない'+B+'は、'+b[0]+'を1'+TEN+'と'+sh[0]+'を1'+TEN+DASU+RYO+DOCHI,A+'の',B+'の',tA,tB,2*a[1],tB,
+      A+'：'+a[2]+'×2＝'+tA+EN+'、'+B+'：'+b[1]+'＋'+sh[1]+'＝'+tB+EN);}
+  else if(kind==='coin'){t=a[2]+b[2];ok=coinQ(o,KA+'の'+A+'は、'+a[0]+'を1'+TEN+'と、'+b[0]+'を1'+TEN+DASU+'この'+RY,t,a[1]+b[1],KR+'で'+a[2]+'＋'+b[2]+'＝'+t+EN);}
+  else if(kind==='remain'){t=coat[2]+a[2];ok=wq(o,KA+'の'+A+'は、3000'+EN+'を{持|も}っています。コートを1'+TEN+'と、'+a[0]+'を1'+TEN+'{出|だ}すと、{残|のこ}りのお{金|かね}は、いくらですか。',3000-t,KR+'で'+coat[2]+'＋'+a[2]+'＝'+t+'、3000−'+t);}
+  else if(kind==='join'){
+    var three=L===3,N=2*a[1]+b[1]+(three?coat[1]:0),M=2*a[2]+b[2]+(three?coat[2]:0);
+    ok=cheapQ(o,A+NOT+a[0]+'を2'+TEN+'と、'+b[0]+'を1'+TEN+(three?'と、コートを1'+TEN:'')+'{出|だ}します。{今日|きょう}'+KA+'になってから{出|だ}すのと、'+KA+'にならないで{出|だ}すのとでは、'+DOCHI,
+      KA+'になる',KA+'にならない',M+F,N,M,N,
+      KA+'になる：'+M+'＋{年会費|ねんかいひ}'+F+'＝'+(M+F)+EN+'、'+KA+'にならない：'+N+EN);}
+  else{var bud=pick([2000,2500,3000]),fix=b[2]+SM,k=Math.floor((bud-fix)/sh[2]);if(b===sh||k<2||k>8)return null;
+    ok=cq(o,KA+'の'+A+'は、'+bud+EN+'を{持|も}っています。'+b[0]+'を1'+TEN+'（しみぬきもたのむ）と、ワイシャツをできるだけ{多|おお}く{出|だ}します。ワイシャツは、{何点|なんてん}まで{出|だ}せますか。',k,TEN,
+      b[0]+'は'+b[2]+'＋'+SM+'＝'+fix+EN+'。ワイシャツが'+k+TEN+'のとき'+(fix+k*sh[2])+EN+'、'+(k+1)+TEN+'のとき'+(fix+(k+1)*sh[2])+EN);}
+  if(!ok)return null;
+  return {genre:'クリーニング',lead:nm[0]+'さんたちは、クリーニング{店|てん}に{服|ふく}を{出|だ}します。{次|つぎ}の【{料金表|りょうきんひょう}】と'+OSH+TAIL,
+    tcap:'【{料金表|りょうきんひょう}】（1'+TEN+'の'+RY+'）',tables:[{lbw:40,head:['{品物|しなもの}',FU,KR],rows:it.map(function(x){return [x[0],x[1]+EN,x[2]+EN];})}],notes:notes,qs:o.qs,ans:o.ans};
+}
+
+// ---- ジャンル4：映画のチケットと売店 ----
+function genTicket(L){
+  var OT='{大人|おとな}',ks=[[OT,ri(17,20)*100],['{高校生|こうこうせい}',ri(13,15)*100],['{中学生|ちゅうがくせい}',ri(10,12)*100],['{小学生|しょうがくせい}',ri(7,9)*100]];
+  ks.forEach(function(k,i){k[2]=k[1]-(i===0?pick([200,300]):pick([100,200]));});
+  var pop=['ポップコーン',pr(350,500,L)],ju=['ジュース',pr(200,300,L)],hot=['ホットドッグ',pr(350,450,L)],pam=['パンフレット',pr(700,900,L)],shop=[pop,ju,hot,pam];
+  var W=L===1?200:pick([100,200,300]),ST=100;
+  var nm=shuffle(NAMES),o={qs:[],ans:[]},kid=shuffle(ks.slice(1)),ad=ks[0],a,b,t,ok;
+  var TJ='{当日券|とうじつけん}',MU='{前売|まえう}り{券|けん}',SUI='{水曜日|すいようび}',DOY='{土曜日|どようび}に、',RYO='{料金|りょうきん}は、',KAU='{買|か}いました。',TK='チケットを、';
+  var notes=[L===1?'{毎週|まいしゅう}'+SUI+'は、チケットが1まいにつき'+W+EN+'{引|び}きになります。':'{毎週|まいしゅう}'+SUI+'は、'+TJ+'が1まいにつき'+W+EN+'{引|び}きになります。'+MU+'は{安|やす}くなりません。'];
+  if(L>=2)notes.unshift(MU+'は、{映画|えいが}を{見|み}る{日|ひ}より{前|まえ}に{買|か}うチケットです。');
+  if(L===3)notes.push('{売店|ばいてん}でポップコーンとジュースをいっしょに{買|か}うと、{合計|ごうけい}から'+ST+EN+'{引|び}きになります。');
+  var TJD=L===1?'':TJ+'の';
+  // (1)
+  a=kid[0];
+  if(L===1)wq(o,nm[0]+'さんは、'+DOY+TK+OT+'1まいと、'+a[0]+'1まい'+KAU+RYO+ZEN,ad[1]+a[1],ad[1]+'＋'+a[1]);
+  else wq(o,nm[0]+'さんは、'+DOY+TJD+TK+OT+'2まいと、'+a[0]+'1まい'+KAU+RYO+ZEN,2*ad[1]+a[1],ad[1]+'×2＋'+a[1]);
+  // (2)
+  a=kid[1];
+  if(L===1)wq(o,nm[1]+'さんは、'+DOY+a[0]+'のチケットを1まい{買|か}って、2000'+EN+OTS,2000-a[1],'2000−'+a[1]);
+  else if(rnd()<0.5){b=pick(ks);wq(o,b[0]+'のチケットは、'+MU+'の{方|ほう}が、'+TJ+'よりいくら{安|やす}いですか。',b[1]-b[2],b[1]+'−'+b[2]);}
+  else{t=2*a[2];wq(o,nm[1]+'さんは、'+MU+'を、'+a[0]+'2まい{買|か}って、5000'+EN+OTS,5000-t,a[2]+'×2＝'+t+'、5000−'+t);}
+  // (3) 水曜日
+  a=kid[2];b=kid[0];
+  if(L<=2){t=2*a[1]+b[1];wq(o,nm[2]+'さんは、'+SUI+'に、'+TJD+TK+a[0]+'2まいと、'+b[0]+'1まい'+KAU+RYO+ZEN,t-3*W,a[1]+'×2＋'+b[1]+'＝'+t+'、3まいなので'+W+'×3＝'+3*W+EN+'{引|び}き。'+t+'−'+3*W);}
+  else{t=2*(a[1]-W)+pop[1]+ju[1]-ST;wq(o,nm[2]+'さんは、'+SUI+'に、'+TJD+TK+a[0]+'2まい{買|か}い、{売店|ばいてん}でポップコーンを1つと、ジュースを1つ'+KAU+'{代金|だいきん}は、'+ZEN,t,
+    'チケットは（'+a[1]+'−'+W+'）×2＝'+2*(a[1]-W)+EN+'、{売店|ばいてん}は'+pop[1]+'＋'+ju[1]+'−'+ST+'＝'+(pop[1]+ju[1]-ST)+EN);}
+  // (4)
+  var A=nm[3]+'さん',kind=pick(L===1?['remain','coin']:L===2?['cheap','remain']:['cheap','max','remain']);
+  a=kid[1];b=kid[2];
+  if(kind==='cheap'){var na=ri(1,2),nb=ri(1,2),day=na*(ad[1]-W)+nb*(a[1]-W),adv=na*ad[2]+nb*a[2];
+    ok=cheapQ(o,A+'の{家族|かぞく}は、'+SUI+'に{映画|えいが}を{見|み}に{行|い}きます。'+OT+na+'まいと、'+a[0]+nb+'まいのチケットを、'+SUI+'に'+TJ+'で{買|か}うのと、{前|まえ}の{日|ひ}までに'+MU+'で{買|か}うのとでは、'+DOCHI,
+      TJ+'で{買|か}う',MU+'で{買|か}う',day,adv,na*ad[1]+nb*a[1],adv,
+      TJ+'：（'+ad[1]+'−'+W+'）×'+na+'＋（'+a[1]+'−'+W+'）×'+nb+'＝'+day+EN+'、'+MU+'：'+ad[2]+'×'+na+'＋'+a[2]+'×'+nb+'＝'+adv+EN);}
+  else if(kind==='coin'){t=a[1]+b[1]-2*W;ok=coinQ(o,A+'は、'+SUI+'に、'+TK+a[0]+'1まいと、'+b[0]+'1まい'+KAU+'この{料金|りょうきん}',t,a[1]+b[1],a[1]+'＋'+b[1]+'−'+W+'×2＝'+t+EN);}
+  else if(kind==='max'){var it2=pick([ju,pop,hot]),bud=5000,rest=bud-2*ad[2],k=Math.floor(rest/it2[1]);if(k<2||k>6)return null;
+    ok=cq(o,A+'は、5000'+EN+'を{持|も}っています。'+MU+'を、'+OT+'2まい'+KAU+'{残|のこ}りのお{金|かね}で、{売店|ばいてん}の'+it2[0]+'をできるだけ{多|おお}く{買|か}います。'+it2[0]+'は、いくつまで{買|か}えますか。',k,'つ',
+      '{残|のこ}りは5000−'+ad[2]+'×2＝'+rest+EN+'。'+it2[0]+'が'+k+'つで'+k*it2[1]+EN+'、'+(k+1)+'つで'+(k+1)*it2[1]+EN);}
+  else{var set=L===3?ST:0,tk=L===2?2*a[2]:a[1]-W,bud2=L===2?5000:3000;t=tk+pop[1]+ju[1]-set;if(t>=bud2)return null;
+    ok=wq(o,A+'は、'+bud2+EN+'を{持|も}っています。'+(L===2?MU+'を、'+a[0]+'2まい{買|か}い、':SUI+'に、'+TJD+TK+a[0]+'1まい{買|か}い、')+'{売店|ばいてん}でポップコーンを1つと、ジュースを1つ'+KAU+'{残|のこ}りのお{金|かね}は、いくらですか。',bud2-t,
+      'チケットは'+(L===2?a[2]+'×2＝'+tk:a[1]+'−'+W+'＝'+tk)+EN+'、{売店|ばいてん}は'+pop[1]+'＋'+ju[1]+(set?'−'+set:'')+'＝'+(pop[1]+ju[1]-set)+EN+'。'+bud2+'−'+t);}
+  if(!ok)return null;
+  return {genre:'{映画|えいが}のチケット',lead:nm[0]+'さんたちは、{映画|えいが}を{見|み}に{行|い}きます。{次|つぎ}の【チケットの{料金|りょうきん}】【{売店|ばいてん}】と'+OSH+TAIL,
+    tables:[{cap:'【チケットの{料金|りょうきん}】（1まい）',w:L===1?44:56,lbw:L===1?50:34,head:L===1?['','{料金|りょうきん}']:['',TJ,MU],rows:ks.map(function(k){return L===1?[k[0],k[1]+EN]:[k[0],k[1]+EN,k[2]+EN];})},
+            {cap:'【{売店|ばいてん}】',lbw:62,head:['{売|う}っているもの','ねだん'],rows:yenRows(shop)}],notes:notes,qs:o.qs,ans:o.ans};
+}
+
+// ---- ジャンル5：宅配便（大きさと届け先） ----
+function genDeliver(L){
+  var sizes=[60,80,100,120],regs=['{県内|けんない}','{近|ちか}くの{県|けん}','{遠|とお}くの{県|けん}'];
+  var base=pr(700,900,L),ds=L===1?200:pick([180,200,220,250]),dg=L===1?pick([100,150]):pick([110,130,150,170]);
+  var p=sizes.map(function(x,s){return regs.map(function(y,r){return base+s*ds+r*dg;});});
+  var MD=100,CL=L>=2?pick([200,220]):0;
+  var NI='{荷物|にもつ}',KO='{個|こ}',OKU='{送|おく}ります。',RYO='{料金|りょうきん}は、',UK='{受付|うけつけ}まで{持|も}って{行|い}って、',IE='{家|いえ}まで{取|と}りに{来|き}てもらって、',CB='クール{便|びん}';
+  function dims(s){var lim=sizes[s],tot=lim-pick([0,5,10,15]),c=pick([10,15]),a=Math.round(tot*0.4/5)*5+pick([-5,0,5]),b=tot-a-c;if(b<10||a<10)return dims(s);
+    return {t:'たて'+a+'cm、よこ'+b+'cm、{高|たか}さ'+c+'cmの'+NI,d:a+'＋'+b+'＋'+c+'＝'+tot+'cmなので「'+lim+'cmまで」'};}
+  function lab(s){return '「'+sizes[s]+'cmまで」の'+NI;}
+  // t：問題文での言い方　d：大きさの決め方　w：料金までの説明
+  function sz(s,r){if(L<3)return {t:lab(s),d:'',w:''};var x=dims(s);x.d+='。';x.w=x.d.replace('。','で'+p[s][r]+EN+'。');return x;}
+  var nm=shuffle(NAMES),o={qs:[],ans:[]},s1,s2,r1,r2,A,B,t,ok;
+  var notes=[NI+'の{大|おお}きさは、たて・よこ・{高|たか}さを{合|あ}わせた{長|なが}さです。',NI+'を{自分|じぶん}で{受付|うけつけ}まで{持|も}って{行|い}くと、1'+KO+'につき'+MD+EN+'{引|び}きになります。'];
+  if(L>=2)notes.push('{冷|ひ}やして{送|おく}る「'+CB+'」は、1'+KO+'につき'+CL+EN+'{高|たか}くなります。');
+  // (1)
+  s1=ri(0,3);s2=(s1+ri(1,3))%4;r1=ri(0,2);r2=L===1?r1:(r1+ri(1,2))%3;A=sz(s1,r1);B=sz(s2,r2);t=p[s1][r1]+p[s2][r2];
+  if(L===1)wq(o,nm[0]+'さんは、'+IE+A.t+'を1'+KO+'と、'+B.t+'を1'+KO+'、'+regs[r1]+'に'+OKU+RYO+ZEN,t,p[s1][r1]+'＋'+p[s2][r2]);
+  else wq(o,nm[0]+'さんは、'+IE+A.t+'を'+regs[r1]+'に、'+B.t+'を'+regs[r2]+'に、1'+KO+'ずつ'+OKU+RYO+ZEN,t,A.w+B.w+p[s1][r1]+'＋'+p[s2][r2]);
+  // (2)
+  s1=ri(0,3);r1=ri(0,2);A=sz(s1,r1);
+  if(rnd()<0.5){A=sz(s1,0);wq(o,A.t+'を1'+KO+'{送|おく}るとき、'+regs[2]+'に{送|おく}る'+RYO+regs[0]+'に{送|おく}る{料金|りょうきん}より、いくら{高|たか}いですか。',p[s1][2]-p[s1][0],A.d+p[s1][2]+'−'+p[s1][0]);}
+  else wq(o,nm[1]+'さんは、'+IE+A.t+'を1'+KO+'、'+regs[r1]+'に{送|おく}って、2000'+EN+OTS,2000-p[s1][r1],A.w+'2000−'+p[s1][r1]);
+  // (3)
+  s1=ri(0,3);s2=(s1+ri(1,3))%4;r1=ri(0,2);A=sz(s1,r1);B=sz(s2,r1);
+  if(L===1){t=2*p[s1][r1];wq(o,nm[2]+'さんは、'+UK+A.t+'を2'+KO+'、'+regs[r1]+'に'+OKU+RYO+ZEN,t-2*MD,p[s1][r1]+'×2＝'+t+'、2'+KO+'なので'+MD+'×2＝'+2*MD+EN+'{引|び}き。'+t+'−'+2*MD);}
+  else{t=p[s1][r1]+CL+p[s2][r1];wq(o,nm[2]+'さんは、'+UK+A.t+'を1'+KO+'（'+CB+'）と、'+B.t+'を1'+KO+'、'+regs[r1]+'に'+OKU+RYO+ZEN,t-2*MD,A.w+B.w+p[s1][r1]+'＋'+CL+'＋'+p[s2][r1]+'＝'+t+'、2'+KO+'なので'+MD+'×2＝'+2*MD+EN+'{引|び}き。'+t+'−'+2*MD);}
+  // (4)
+  var who=nm[3]+'さん',kind=pick(L===3?['split','remain']:['split','coin','remain']);
+  s1=ri(0,1);s2=s1+2;r1=ri(0,2);
+  if(kind==='split'){var t2=2*(p[s1][r1]-MD),t1=p[s2][r1]-MD;
+    ok=cheapQ(o,who+'は、'+NI+'を'+UK+regs[r1]+'に'+OKU+lab(s1)+'2'+KO+'に{分|わ}けて{送|おく}るのと、'+lab(s2)+'1'+KO+'にまとめて{送|おく}るのとでは、'+DOCHI,
+      '2'+KO+'に{分|わ}ける','1'+KO+'にまとめる',t2,t1,2*p[s1][r1],p[s2][r1],
+      '2'+KO+'に{分|わ}ける：（'+p[s1][r1]+'−'+MD+'）×2＝'+t2+EN+'、1'+KO+'にまとめる：'+p[s2][r1]+'−'+MD+'＝'+t1+EN);}
+  else if(kind==='coin'){s1=ri(0,3);
+    if(L===1){t=2*(p[s1][r1]-MD);ok=coinQ(o,who+'は、'+UK+lab(s1)+'を2'+KO+'、'+regs[r1]+'に'+OKU+'この{料金|りょうきん}',t,2*p[s1][r1],'（'+p[s1][r1]+'−'+MD+'）×2＝'+t+EN);}
+    else{t=p[s1][r1]+CL-MD;ok=coinQ(o,who+'は、'+UK+lab(s1)+'を1'+KO+'、'+CB+'で'+regs[r1]+'に'+OKU+'この{料金|りょうきん}',t,p[s1][r1],p[s1][r1]+'＋'+CL+'−'+MD+'＝'+t+EN);}}
+  else{s1=ri(0,3);s2=(s1+ri(1,3))%4;A=sz(s1,r1);B=sz(s2,r1);var cl=L>=2?CL:0;t=p[s1][r1]+p[s2][r1]+cl-2*MD;if(t>=3000)return null;
+    ok=wq(o,who+'は、3000'+EN+'を{持|も}っています。'+UK+A.t+'を1'+KO+(cl?'（'+CB+'）':'')+'と、'+B.t+'を1'+KO+'、'+regs[r1]+'に{送|おく}ると、{残|のこ}りのお{金|かね}は、いくらですか。',3000-t,
+      A.w+B.w+p[s1][r1]+(cl?'＋'+cl:'')+'＋'+p[s2][r1]+'−'+MD+'×2＝'+t+'、3000−'+t);}
+  if(!ok)return null;
+  return {genre:'{宅配便|たくはいびん}',lead:nm[0]+'さんたちは、{宅配便|たくはいびん}で'+NI+'を{送|おく}ります。{次|つぎ}の【{料金表|りょうきんひょう}】と'+OSH+TAIL,
+    tcap:'【{料金表|りょうきんひょう}】（'+NI+'1'+KO+'の{料金|りょうきん}）',tables:[{lbw:31,head:[NI+'の{大|おお}きさ'].concat(regs.map(function(r){return r+'に{送|おく}る';})),rows:sizes.map(function(x,s){return [x+'cmまで'].concat(p[s].map(function(v){return v+EN;}));})}],notes:notes,qs:o.qs,ans:o.ans};
+}
+
+var GENRES=[
+  {id:'ramen',name:'ラーメン{屋|や}',gen:genRamen},
+  {id:'cafe',name:'カフェ',gen:genCafe},
+  {id:'clean',name:'クリーニング',gen:genClean},
+  {id:'ticket',name:'{映画|えいが}',gen:genTicket},
+  {id:'deliver',name:'{宅配便|たくはいびん}',gen:genDeliver}];
+// ジャンルid・レベル(1〜3)から問題を1つ作る
+function makeProblem(id,L){
+  var g=GENRES.filter(function(x){return x.id===id;})[0];
+  for(var i=0;i<3000;i++){var p=g.gen(L);if(p)return p;}
+  return null;
+}
+/*GEN-END*/
+
+// ===== ここから下は画面と印刷 =====
+function R(s){return String(s).replace(/\{([^|{}]+)\|([^{}]+)\}/g,'<ruby>$1<rt>$2</rt></ruby>');}
+function $(id){return document.getElementById(id);}
+var S={genre:'any',level:2,count:1,ans:true};
+try{var sv=JSON.parse(localStorage.getItem('okanePrint')||'null');if(sv)for(var kk in S)if(kk in sv)S[kk]=sv[kk];}catch(e){}
+function save(){try{localStorage.setItem('okanePrint',JSON.stringify(S));}catch(e){}}
+
+function pageHTML(p,no,many){
+  var h='<div class="page"><div class="sheet"><div class="in"><div class="nm"><span class="no">'+(many?'No.'+no:'')+'</span><span class="nr"><span>'+R('{名前|なまえ}')+'</span><span class="line"></span></span></div>';
+  h+='<p class="lead" data-e>'+R(p.lead)+'</p>';
+  if(p.tcap)h+='<div class="cap" data-e>'+R(p.tcap)+'</div>';
+  h+='<div class="tw">';
+  p.tables.forEach(function(t){
+    h+='<div class="tc"'+(t.w?' style="flex:0 0 '+t.w+'%"':'')+'>'+(t.cap?'<div class="cap" data-e>'+R(t.cap)+'</div>':'')
+      +'<table class="tb"><colgroup><col style="width:'+t.lbw+'%"></colgroup><tr>'+t.head.map(function(c){return '<th data-e>'+R(c)+'</th>';}).join('')+'</tr>';
+    t.rows.forEach(function(r){h+='<tr>'+r.map(function(c,i){return i===0?'<th class="rh" data-e>'+R(c)+'</th>':'<td data-e>'+R(c)+'</td>';}).join('')+'</tr>';});
+    h+='</table></div>';});
+  h+='</div>';
+  if(p.notes&&p.notes.length)h+='<div class="note"><div class="nt" data-e>'+R(OSH)+'</div>'+p.notes.map(function(n){return '<div class="ni" data-e>・'+R(n)+'</div>';}).join('')+'</div>';
+  p.qs.forEach(function(q,i){
+    h+='<div class="q"><div class="qt" data-e>（'+(i+1)+'）'+R(q.t)+(q.a?'　<span class="bl">'+R(q.a)+'</span>':'')+'</div>';
+    if(q.opts)h+='<div class="opts'+(q.col?' col':'')+'">'+q.opts.map(function(o){return '<span data-e>（　）'+R(o)+'</span>';}).join('')+'</div>';
+    h+='</div>';});
+  return h+'</div></div></div>';
+}
+function ansHTML(p,no,many){
+  var h='<div class="page ansp"><div class="sheet"><div class="in"><h2 data-e>'+R('{答|こた}え')+(many?'（No.'+no+'）':'')+'　'+R(p.genre)+'</h2>';
+  p.ans.forEach(function(a,i){h+='<div class="al" data-e>（'+(i+1)+'）<b>'+R(a.a)+'</b>'+(a.w?'<span class="why">'+R(a.w)+'</span>':'')+'</div>';});
+  return h+'</div></div></div>';
+}
+function build(){
+  var order=shuffle(GENRES.map(function(g){return g.id;})),h='',many=S.count>1;
+  for(var i=0;i<S.count;i++){
+    var id=S.genre==='any'?order[i%order.length]:S.genre,p=makeProblem(id,S.level);
+    if(!p){say('{問題|もんだい}がうまく{作|つく}れなかったよ。もう{一度|いちど}おしてみてね。');continue;}
+    h+=pageHTML(p,i+1,many);if(S.ans)h+=ansHTML(p,i+1,many);
+  }
+  $('pages').innerHTML=h;
+  [].forEach.call($('pages').querySelectorAll('[data-e]'),function(e){e.setAttribute('contenteditable','true');});
+  layout();fitAll();
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitAll);
+}
+// 1まいに収める：計算を書くための空き（--gap）を広くとり、入りきらないときは少しずつ縮める
+function fitPage(pg){
+  var sh=pg.querySelector('.sheet'),gap=22,lh=2,cp=1.3,nm=7,n=0;
+  function set(){pg.style.setProperty('--gap',gap+'mm');pg.style.setProperty('--lh',lh.toFixed(2));pg.style.setProperty('--cp',cp.toFixed(1)+'mm');pg.style.setProperty('--nm',nm+'mm');}
+  function over(){return sh.firstElementChild.offsetHeight>sh.clientHeight-4;}
+  set();
+  while(over()&&n++<200){if(gap>5)gap-=1;else if(cp>0.7)cp-=0.1;else if(nm>3)nm-=1;else if(gap>1)gap-=0.5;else if(lh>1.65)lh-=0.05;else if(gap>0)gap-=0.5;else break;set();}
+  var w=pg.querySelector('.warn');if(w)w.remove();
+  if(over()){w=document.createElement('div');w.className='warn noprint';w.innerHTML=R('1まいに{入|はい}りきっていないよ。{文|ぶん}を{短|みじか}くするか、{新|あたら}しい{問題|もんだい}を{作|つく}ってみてね。');pg.appendChild(w);}
+}
+function fitAll(){[].forEach.call($('pages').querySelectorAll('.page'),fitPage);layout();}
+function layout(){
+  var pv=$('pv'),sc=$('scaler'),first=$('pages').querySelector('.page');if(!first)return;
+  var pw=first.offsetWidth,avail=pv.clientWidth-16,k=Math.min(1,avail/pw);
+  sc.style.width=pw+'px';sc.style.transform='scale('+k+')';sc.style.marginLeft=Math.max(0,(avail-pw*k)/2)+'px';
+  $('pvh').style.height=(sc.offsetHeight*k)+'px';
+}
+function exportHTML(){
+  var c=$('pages').cloneNode(true);
+  [].forEach.call(c.querySelectorAll('.warn'),function(e){e.remove();});
+  [].forEach.call(c.querySelectorAll('[contenteditable]'),function(e){e.removeAttribute('contenteditable');e.removeAttribute('data-e');});
+  return '<!DOCTYPE html>\n<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=840"><title>お金の計算 プリント</title>'
+    +'<link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&display=swap" rel="stylesheet">'
+    +'<style>'+$('pageCss').textContent+'body{margin:0;background:#ddd}.page{margin:0 auto 6mm}.bar{padding:10px;text-align:center;font-family:\'BIZ UDPGothic\',sans-serif}.bar button{font-family:inherit;font-size:18px;min-height:48px;padding:4px 24px;border-radius:8px;border:2px solid #2f7f99;background:#2f7f99;color:#fff;line-height:1.9}rt{font-size:.5em}</style></head>'
+    +'<body><div class="bar noprint"><button onclick="window.print()">'+R('{印刷|いんさつ}する')+'</button></div>'+c.innerHTML+'</body></html>';
+}
+var msgT=0;
+function say(s){$('msg').innerHTML=R(s);clearTimeout(msgT);msgT=setTimeout(function(){$('msg').innerHTML='';},6000);}
+
+// ---- 設定の部品 ----
+function group(el,opts,key){
+  el.innerHTML='';opts.forEach(function(o){var b=document.createElement('button');b.innerHTML=R(o[1]);if(S[key]===o[0])b.className='on';
+    b.addEventListener('click',function(){S[key]=o[0];save();group(el,opts,key);build();});el.appendChild(b);});
+}
+function stepper(el,key,min,max){
+  el.innerHTML='<button aria-label="へらす">▽</button><input type="number" inputmode="numeric" min="'+min+'" max="'+max+'"><button aria-label="ふやす">△</button>';
+  var inp=el.querySelector('input'),bs=el.querySelectorAll('button');inp.value=S[key];
+  function set(v){v=Math.max(min,Math.min(max,Math.round(v)||min));S[key]=v;inp.value=v;save();build();}
+  bs[0].addEventListener('click',function(){set(S[key]-1);});bs[1].addEventListener('click',function(){set(S[key]+1);});
+  inp.addEventListener('change',function(){set(+inp.value);});
+}
+[].forEach.call(document.querySelectorAll('[data-r]'),function(e){e.innerHTML=R(e.getAttribute('data-r'));});
+group($('gGenre'),[['any','おまかせ']].concat(GENRES.map(function(g){return [g.id,g.name];})),'genre');
+group($('gAns'),[[true,'つける'],[false,'つけない']],'ans');
+stepper($('sLevel'),'level',1,3);stepper($('sCount'),'count',1,10);
+
+// ---- 説明 ----
+function helpHTML(){
+  var h='<h3>'+R('ジャンル（{問題|もんだい}のテーマ）')+'</h3><table>';
+  [['ラーメン{屋|や}','ラーメンとサイドメニューの{注文|ちゅうもん}。{大|おお}もり・セット{割引|わりびき}・10日の{割引|わりびき}'],
+   ['カフェ','{飲|の}み{物|もの}と{食|た}べ{物|もの}の{注文|ちゅうもん}。{持|も}ち{帰|かえ}りの{割引|わりびき}・{大|おお}きいサイズ'],
+   ['クリーニング','ふつうの{料金|りょうきん}と{会員|かいいん}の{料金|りょうきん}。{年会費|ねんかいひ}・しみぬき'],
+   ['{映画|えいが}','チケット（{当日券|とうじつけん}・{前売|まえう}り{券|けん}）と{売店|ばいてん}。{水曜日|すいようび}の{割引|わりびき}・セット{割引|わりびき}'],
+   ['{宅配便|たくはいびん}','{荷物|にもつ}の{大|おお}きさと{送|おく}り{先|さき}の{料金表|りょうきんひょう}。{持|も}ちこみ{割引|わりびき}・クール{便|びん}'],
+   ['おまかせ','まい{数|すう}が2{以上|いじょう}のとき、ジャンルをじゅんばんに{変|か}えて{作|つく}ります']].forEach(function(r){h+='<tr><th>'+R(r[0])+'</th><td>'+R(r[1])+'</td></tr>';});
+  h+='</table><h3>'+R('レベル（むずかしさ）')+'</h3><table>';
+  [['1　やさしい','{条件|じょうけん}は1つだけ。ねだんは50{円|えん}きざみです'],
+   ['2　ふつう','{割引|わりびき}や{追加|ついか}の{料金|りょうきん}などの{条件|じょうけん}が{増|ふ}えます。ねだんは10{円|えん}きざみです'],
+   ['3　むずかしい','{条件|じょうけん}がさらに{増|ふ}え、（4）も{考|かんが}えることが{多|おお}くなります']].forEach(function(r){h+='<tr><th>'+R(r[0])+'</th><td>'+R(r[1])+'</td></tr>';});
+  h+='</table><h3>'+R('{小問|しょうもん}（（1）〜（4））')+'</h3><table>';
+  [['（1）','{合計|ごうけい}を{求|もと}める'],
+   ['（2）','おつり、またはねだんの{差|さ}'],
+   ['（3）','{割引|わりびき}などの{条件|じょうけん}がついた{合計|ごうけい}'],
+   ['（4）','いちばん{難|むずか}しい{問題|もんだい}です。ジャンルとレベルで{型|かた}が{変|か}わります：<br>どちらがいくら{安|やす}いか（3つから{選|えら}ぶ）／{残|のこ}りのお{金|かね}／いくつまで{買|か}えるか／おつりから{注文|ちゅうもん}を{当|あ}てる／お{金|かね}の{組|く}み{合|あ}わせ（3つから{選|えら}ぶ）']].forEach(function(r){h+='<tr><th>'+R(r[0])+'</th><td>'+R(r[1])+'</td></tr>';});
+  h+='</table><p>'+R('3つから{選|えら}ぶ{問題|もんだい}のまちがいには、{割引|わりびき}や{年会費|ねんかいひ}などを{忘|わす}れた{結果|けっか}が{入|はい}っています。')+'</p>';
+  h+='<h3>'+R('つかいかた')+'</h3><p>'+R('・プリントの{文字|もじ}や{数字|すうじ}は、タップして{直|なお}せます（{答|こた}えは{変|か}わりません）。')+'</p><p>'+R('・「{答|こた}え」を「つける」にすると、{問題|もんだい}のあとに{答|こた}えと{式|しき}のページが{出|で}ます。')+'</p><p>'+R('・1{問|もん}は、A4の1まいに{入|はい}ります。')+'</p>';
+  return h;
+}
+$('helpBody').innerHTML=helpHTML();
+$('bHelp').addEventListener('click',function(){$('help').hidden=false;$('helpBody').scrollTop=0;});
+$('bHelpClose').addEventListener('click',function(){$('help').hidden=true;});
+$('help').addEventListener('click',function(e){if(e.target===$('help'))$('help').hidden=true;});
+$('bSet').addEventListener('click',function(){$('panel').classList.toggle('hide');layout();});
+$('bNew').addEventListener('click',function(){build();$('pv').scrollTop=0;});
+$('bPrint').addEventListener('click',function(){
+  var ae=document.activeElement;if(ae&&ae.blur)ae.blur();
+  try{window.print();}catch(e){say('{印刷|いんさつ}できなかったよ。ブラウザで{開|ひら}いてためしてね。');}
+});
+$('bCopy').addEventListener('click',function(){
+  var ta=document.createElement('textarea');ta.value=exportHTML();ta.style.position='fixed';ta.style.left='-9999px';document.body.appendChild(ta);
+  ta.focus();ta.select();ta.setSelectionRange(0,ta.value.length);var ok=false;try{ok=document.execCommand('copy');}catch(e){}
+  var html=ta.value;ta.remove();
+  if(ok){say('HTMLをコピーしたよ。');return;}
+  try{navigator.clipboard.writeText(html).then(function(){say('HTMLをコピーしたよ。');},function(){say('コピーできなかったよ。');});}catch(e){say('コピーできなかったよ。');}
+});
+$('pages').addEventListener('input',function(e){var pg=e.target.closest&&e.target.closest('.page');if(pg){fitPage(pg);layout();}});
+window.addEventListener('resize',layout);
+
+// ---- iPad向け：ズームなどの標準動作を止める ----
+document.addEventListener('gesturestart',function(e){e.preventDefault();});
+document.addEventListener('touchmove',function(e){if(e.touches.length>1)e.preventDefault();},{passive:false});
+var lastTap=0;
+document.addEventListener('touchend',function(e){
+  var now=Date.now(),t=e.target,free=t.closest&&t.closest('button,input,[contenteditable]');
+  if(!free&&now-lastTap<300)e.preventDefault();lastTap=now;
+},{passive:false});
+build();
+</script>
+</body>
+</html>
